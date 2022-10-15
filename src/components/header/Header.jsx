@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import MenuIcon from './MenuIcon';
 import SideBar from './SideBar';
 import wi from '../../assets/wi.svg';
+import { responsive } from '../../styles/theme';
 import styled from 'styled-components';
 
 const Header = () => {
@@ -11,7 +12,7 @@ const Header = () => {
   return (
     <HeaderContainer>
       <MenuIcon openSide={openSide} setOpenSide={setOpenSide} />
-      <Link>
+      <Link to='/'>
         <img src={wi} alt='위닝아이 로고' className='logo' />
       </Link>
       <SideBar openSide={openSide} />
@@ -20,10 +21,13 @@ const Header = () => {
 };
 
 const HeaderContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100vw;
   padding: 15px;
   background-color: black;
 
@@ -37,7 +41,7 @@ const HeaderContainer = styled.div`
     width: 225px;
   }
 
-  @media screen and (max-width: 480px) {
+  @media ${responsive.mobile} {
     .logo {
       width: 175px;
     }

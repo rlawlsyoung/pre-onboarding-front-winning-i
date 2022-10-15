@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const MenuIcon = ({ openSide, setOpenSide }) => {
   const handleMenu = () => {
@@ -6,10 +6,10 @@ const MenuIcon = ({ openSide, setOpenSide }) => {
   };
 
   return (
-    <MenuIconContainer onClick={handleMenu} className={!openSide && "change"}>
-      <div className="bar1"></div>
-      <div className="bar2"></div>
-      <div className="bar3"></div>
+    <MenuIconContainer onClick={handleMenu} className={openSide && 'change'}>
+      <div className='bar1'></div>
+      <div className='bar2'></div>
+      <div className='bar3'></div>
     </MenuIconContainer>
   );
 };

@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import { Dialog, TextField, createTheme } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useSetRecoilState } from 'recoil';
+import { Dialog, TextField, createTheme } from '@mui/material';
 import { isDialogOnAtom, openSideAtom } from '../../atom';
 import { mainGreen, clickedGreen } from '../../styles/theme';
 import styled from 'styled-components';
 
 const Login = () => {
+  const [isSignUp, setIsSignUp] = useState(false);
   const [isDialogOn, setIsDialogOn] = useRecoilState(isDialogOnAtom);
   const setOpenSide = useSetRecoilState(openSideAtom);
   const navigate = useNavigate();
@@ -26,16 +27,19 @@ const Login = () => {
       <form className='login-form' onSubmit={handleSubmit}>
         <h2 className='title'>로그인</h2>
         <TextField
+          type='email'
           sx={{ m: 1.5 }}
-          label='아이디'
+          label='이메일'
           color='success'
           size='small'
+          autoComplete='off'
         />
         <TextField
           label='패스워드'
           type='password'
           color='success'
           size='small'
+          autoComplete='off'
         />
         <button className='login-btn'>로그인</button>
 
@@ -62,9 +66,13 @@ const LoginContainer = styled(Dialog)`
       font-weight: 700;
     }
 
+    input {
+      width: 240px;
+    }
+
     .login-btn {
-      height: 35px;
-      width: 222.67px;
+      height: 40px;
+      width: 268px;
       margin-top: 25px;
       border: none;
       border-radius: 3px;
@@ -80,7 +88,7 @@ const LoginContainer = styled(Dialog)`
 
     .signup {
       margin-top: 20px;
-      font-size: 14px;
+      font-size: 14.5px;
 
       a {
         color: ${mainGreen};

@@ -1,11 +1,10 @@
-import { useState } from 'react';
 import Chart from 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
 import { responsive, mainGreen } from '../../styles/theme';
 import styled from 'styled-components';
 
 const FirstChart = () => {
-  const [data, setData] = useState({
+  const data = {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
     datasets: [
       {
@@ -14,17 +13,17 @@ const FirstChart = () => {
         borderColor: mainGreen,
       },
     ],
-  });
+  };
 
   return (
-    <StyledFirstChart className='flex-center'>
+    <FirstChartContainer className='flex-center'>
       <h2 className='title'>월별 내 게시글 조회수</h2>
       <Line data={data} className='chart' />
-    </StyledFirstChart>
+    </FirstChartContainer>
   );
 };
 
-const StyledFirstChart = styled.div`
+const FirstChartContainer = styled.div`
   flex-direction: column;
   width: calc(93vw / 3);
   font-size: 24px;

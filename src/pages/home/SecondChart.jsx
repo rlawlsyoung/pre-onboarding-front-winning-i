@@ -1,11 +1,10 @@
-import { useState } from 'react';
 import Chart from 'chart.js/auto';
 import { Pie } from 'react-chartjs-2';
 import { responsive, mainGreen } from '../../styles/theme';
 import styled from 'styled-components';
 
 const SecondChart = () => {
-  const [data, setData] = useState({
+  const data = {
     labels: ['10대', '20대', '30대', '40대', '50대 이상'],
     datasets: [
       {
@@ -14,19 +13,19 @@ const SecondChart = () => {
         borderColor: mainGreen,
       },
     ],
-  });
+  };
 
   return (
-    <StyledSecondChart className='flex-center'>
+    <SecondChartContainer className='flex-center'>
       <div className='chart-container flex-center'>
         <h2 className='title'>조회자 연령층</h2>
         <Pie data={data} className='chart' />
       </div>
-    </StyledSecondChart>
+    </SecondChartContainer>
   );
 };
 
-const StyledSecondChart = styled.div`
+const SecondChartContainer = styled.div`
   flex-direction: column;
   width: calc(93vw / 3);
   font-size: 24px;

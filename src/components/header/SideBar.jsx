@@ -1,9 +1,9 @@
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { isDialogOnAtom, openSideAtom } from '../../atom';
+import SideBarMenu from './SideBarMenu';
 import { IoPersonCircleSharp } from 'react-icons/io5';
 import { FaRegClipboard, FaHome } from 'react-icons/fa';
 import { MdSettings } from 'react-icons/md';
-import SideBarMenu from './SideBarMenu';
 import { mainGray } from '../../styles/theme';
 import styled from 'styled-components';
 

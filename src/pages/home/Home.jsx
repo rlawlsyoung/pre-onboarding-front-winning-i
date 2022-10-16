@@ -1,7 +1,7 @@
-import { IoPersonCircleSharp } from 'react-icons/io5';
 import FirstChart from './FirstChart';
 import SecondChart from './SecondChart';
 import ThirdChart from './ThirdChart';
+import { IoPersonCircleSharp } from 'react-icons/io5';
 import { responsive } from '../../styles/theme';
 import styled from 'styled-components';
 

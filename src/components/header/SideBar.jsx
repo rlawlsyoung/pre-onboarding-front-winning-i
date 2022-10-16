@@ -62,7 +62,7 @@ const SideBarContainer = styled.div`
   box-shadow: 6px 0 5px -5px gray;
   background-color: #f8f9fa;
   transition: 0.3s;
-  transform: translateX(${({ openSide }) => (openSide ? '-100%' : '0%')});
+  transform: translateX(${({ openSide }) => (openSide ? '0%' : '-102%')});
   z-index: 20;
 
   .hover {

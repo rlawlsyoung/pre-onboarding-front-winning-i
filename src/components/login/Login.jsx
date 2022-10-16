@@ -3,11 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Dialog, TextField, createTheme } from '@mui/material';
 import { isDialogOnAtom, openSideAtom } from '../../atom';
-import { mainGreen, clickedGreen } from '../../styles/theme';
+import {
+  mainGreen,
+  deepGreen,
+  mainBlack,
+  responsive,
+} from '../../styles/theme';
 import styled from 'styled-components';
 
 const Login = () => {
-  const [isSignUp, setIsSignUp] = useState(false);
   const [isDialogOn, setIsDialogOn] = useRecoilState(isDialogOnAtom);
   const setOpenSide = useSetRecoilState(openSideAtom);
   const navigate = useNavigate();
@@ -27,23 +31,31 @@ const Login = () => {
       <form className='login-form' onSubmit={handleSubmit}>
         <h2 className='title'>로그인</h2>
         <TextField
-          type='text'
+          className='input'
           sx={{ m: 1.5 }}
+          type='text'
           label='이메일'
           color='success'
           size='small'
           autoComplete='off'
+          inputProps={{
+            maxLength: 24,
+          }}
         />
         <TextField
-          label='패스워드'
+          className='input'
           type='password'
+          label='패스워드'
           color='success'
           size='small'
           autoComplete='off'
+          inputProps={{
+            maxLength: 16,
+          }}
         />
         <button className='login-btn'>로그인</button>
 
-        <p className='signup'>
+        <p className='sign-up'>
           아이디가 없다면? <a onClick={handleNavigate}>회원가입</a>
         </p>
       </form>
@@ -57,8 +69,9 @@ const LoginContainer = styled(Dialog)`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 300px;
-    height: 380px;
+    width: 480px;
+    height: 340px;
+    padding: 20px;
 
     .title {
       margin-bottom: 10px;
@@ -66,27 +79,23 @@ const LoginContainer = styled(Dialog)`
       font-weight: 700;
     }
 
-    input {
-      width: 240px;
+    .input {
+      width: 100%;
     }
 
     .login-btn {
       height: 40px;
-      width: 268px;
+      width: 100%;
       margin-top: 25px;
       border: none;
       border-radius: 3px;
-      background-color: ${mainGreen};
+      background-color: ${mainBlack};
       color: white;
       font-family: 'Pretendard', sans-serif;
       cursor: pointer;
-
-      &:active {
-        background-color: ${clickedGreen};
-      }
     }
 
-    .signup {
+    .sign-up {
       margin-top: 20px;
       font-size: 14.5px;
 
@@ -94,6 +103,12 @@ const LoginContainer = styled(Dialog)`
         color: ${mainGreen};
         cursor: pointer;
       }
+    }
+  }
+
+  @media ${responsive.mobile} {
+    .login-form {
+      width: 80vw;
     }
   }
 `;

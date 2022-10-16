@@ -2,7 +2,12 @@ import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { openSideAtom } from '../../atom';
 import { TextField, Checkbox } from '@mui/material';
-import { mainGreen, clickedGreen } from '../../styles/theme';
+import {
+  mainGreen,
+  mainBlack,
+  clickedGreen,
+  responsive,
+} from '../../styles/theme';
 import styled from 'styled-components';
 
 const SignUp = () => {
@@ -39,17 +44,16 @@ const SignUp = () => {
       <form className='sign-up-form flex-center' onSubmit={handleSubmit}>
         <h2 className='title'>간편 회원가입</h2>
         <p className='sign flex-center'>
-          이메일은 @를 포함하여, 비밀번호는 영문, 숫자를 조합해서 8~16자로
-          작성해주세요.
+          이메일은 @를 포함, 패스워드는 영문, 숫자 조합 8~16자로 작성해주세요.
         </p>
         <TextField
+          className='input'
           sx={{ m: 1.5 }}
           type='text'
           label='이름'
           color='success'
           size='small'
           autoComplete='off'
-          className='input'
           inputProps={{
             maxLength: 8,
           }}
@@ -59,13 +63,13 @@ const SignUp = () => {
           {nameValue ? '사용 가능한 이름입니다.' : '이름을 입력해주세요.'}
         </p>
         <TextField
+          className='input'
           sx={{ m: 1.5 }}
           type='text'
           label='이메일'
           color='success'
           size='small'
           autoComplete='off'
-          className='input'
           inputProps={{
             maxLength: 24,
           }}
@@ -111,6 +115,9 @@ const SignUp = () => {
 };
 
 const StyledSignUp = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding-top: 70.35px;
   margin-top: 3.5vw;
 
@@ -122,6 +129,8 @@ const StyledSignUp = styled.div`
 
   .sign-up-form {
     flex-direction: column;
+    width: 480px;
+
     .title {
       font-size: 28px;
       font-weight: 700;
@@ -129,16 +138,17 @@ const StyledSignUp = styled.div`
 
     .sign {
       margin: 20px 0;
+      text-align: center;
     }
 
     .input {
-      width: 480px;
+      width: 100%;
     }
 
     .alert {
       height: 16px;
-      width: 480px;
-      color: ${mainGreen};
+      width: 100%;
+      color: ${mainBlack};
       font-weight: 700;
     }
 
@@ -153,18 +163,20 @@ const StyledSignUp = styled.div`
 
     .sign-up-btn {
       height: 40px;
-      width: 480px;
+      width: 100%;
       margin-top: 25px;
       border: none;
       border-radius: 3px;
-      background-color: ${mainGreen};
+      background-color: ${mainBlack};
       color: white;
       font-family: 'Pretendard', sans-serif;
       cursor: pointer;
+    }
+  }
 
-      &:active {
-        background-color: ${clickedGreen};
-      }
+  @media ${responsive.mobile} {
+    .sign-up-form {
+      width: 80vw;
     }
   }
 `;

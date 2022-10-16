@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import MenuIcon from './MenuIcon';
 import SideBar from './SideBar';
 import wi from '../../assets/wi.svg';
-import { responsive } from '../../styles/theme';
+import { responsive, mainBlack } from '../../styles/theme';
 import styled from 'styled-components';
 
 const Header = () => {
@@ -26,7 +26,7 @@ const HeaderContainer = styled.div`
   align-items: center;
   justify-content: center;
   padding: 15px;
-  background-color: black;
+  background-color: ${mainBlack};
 
   .flex-center {
     display: flex;

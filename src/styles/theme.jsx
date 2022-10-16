@@ -1,6 +1,6 @@
 const mainBlack = 'black';
+const deepGreen = '#2e7d32';
 const mainGreen = '#12b886';
-const clickedGreen = '#00a972';
 const mainGray = '#f8f9fa';
 
 const responsive = {
@@ -9,4 +9,4 @@ const responsive = {
   desktop: 'screen and (max-width: 1200px)',
 };
 
-export { mainBlack, mainGreen, clickedGreen, mainGray, responsive };
+export { mainBlack, deepGreen, mainGreen, mainGray, responsive };

@@ -27,7 +27,7 @@ const Login = () => {
       <form className='login-form' onSubmit={handleSubmit}>
         <h2 className='title'>로그인</h2>
         <TextField
-          type='email'
+          type='text'
           sx={{ m: 1.5 }}
           label='이메일'
           color='success'

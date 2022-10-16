@@ -6,33 +6,76 @@ import { mainGreen, clickedGreen } from '../../styles/theme';
 import styled from 'styled-components';
 
 const SignUp = () => {
+  const [nameValue, setNameValue] = useState('');
   const [emailValue, setEmailValue] = useState('');
   const [pwValue, setPwValue] = useState('');
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isPwValid, setIsPwValid] = useState(false);
+  const [checkboxOn, setCheckboxOn] = useState(false);
+  const emailRegEx =
+    /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/;
+  const passwordRegEx = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/;
+  const btnDisabled = !nameValue || !isEmailValid || !isPwValid || !checkboxOn;
 
-  const handleEmail = e => setEmailValue(e.target.value);
-  const handlePw = e => setPwValue(e.target.value);
+  const handleName = e => setNameValue(e.target.value);
+  const handleEmail = e => {
+    setEmailValue(e.target.value);
+    setIsEmailValid(emailRegEx.test(e.target.value));
+  };
+  const handlePw = e => {
+    setPwValue(e.target.value);
+    setIsPwValid(passwordRegEx.test(e.target.value));
+  };
+
+  const handleCheckbox = () => setCheckboxOn(!checkboxOn);
+
   const handleSubmit = e => {
     e.preventDefault();
+
+    alert(123);
   };
   return (
     <StyledSignUp>
       <form className='sign-up-form flex-center' onSubmit={handleSubmit}>
         <h2 className='title'>간편 회원가입</h2>
         <p className='sign flex-center'>
-          아이디는 영문으로 12자 이내, 비밀번호는 특수문자를 포함해서 14자
-          이내로 작성해주세요.
+          이메일은 @를 포함하여, 비밀번호는 영문, 숫자를 조합해서 8~16자로
+          작성해주세요.
         </p>
         <TextField
           sx={{ m: 1.5 }}
-          type='email'
+          type='text'
+          label='이름'
+          color='success'
+          size='small'
+          autoComplete='off'
+          className='input'
+          inputProps={{
+            maxLength: 8,
+          }}
+          onChange={handleName}
+        />
+        <p className='alert'>
+          {nameValue ? '사용 가능한 이름입니다.' : '이름을 입력해주세요.'}
+        </p>
+        <TextField
+          sx={{ m: 1.5 }}
+          type='text'
           label='이메일'
           color='success'
           size='small'
           autoComplete='off'
           className='input'
+          inputProps={{
+            maxLength: 24,
+          }}
           onChange={handleEmail}
         />
-        <p className='alert'>아이디 조건에 맞지 않습니다.</p>
+        <p className='alert'>
+          {isEmailValid
+            ? '사용 가능한 이메일입니다.'
+            : '이메일 조건에 맞지 않습니다.'}
+        </p>
         <TextField
           sx={{ m: 1.5 }}
           type='password'
@@ -41,18 +84,27 @@ const SignUp = () => {
           size='small'
           autoComplete='off'
           className='input'
+          inputProps={{
+            maxLength: 16,
+          }}
           onChange={handlePw}
         />
-        <p className='alert'>패스워드 조건에 맞지 않습니다.</p>
+        <p className='alert'>
+          {isPwValid
+            ? '사용 가능한 패스워드입니다.'
+            : '패스워드 조건에 맞지 않습니다.'}
+        </p>
         <div className='provision'>
-          <Checkbox color='success' />
+          <Checkbox color='success' onClick={handleCheckbox} />
           <a href='https://velog.io/@jinyoung985' target='_blank'>
             개인정보 이용 약관
           </a>{' '}
           에 동의합니다.
         </div>
 
-        <button className='sign-up-btn'>회원가입</button>
+        <button className='sign-up-btn' disabled={btnDisabled}>
+          회원가입
+        </button>
       </form>
     </StyledSignUp>
   );

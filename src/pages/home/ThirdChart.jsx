@@ -4,14 +4,14 @@ import { Bar } from 'react-chartjs-2';
 import { responsive, mainGreen } from '../../styles/theme';
 import styled from 'styled-components';
 
-function ThirdChart() {
+const ThirdChart = () => {
   const [data, setData] = useState({
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
     datasets: [
       {
         label: '게시글 수',
         data: [5, 11, 12, 8, 4, 2],
-        borderColor: mainGreen,
+        backgroundColor: mainGreen,
       },
     ],
   });
@@ -22,7 +22,7 @@ function ThirdChart() {
       <Bar data={data} className='chart' />
     </StyledThirdChart>
   );
-}
+};
 
 const StyledThirdChart = styled.div`
   flex-direction: column;

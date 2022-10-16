@@ -4,7 +4,7 @@ import { Line } from 'react-chartjs-2';
 import { responsive, mainGreen } from '../../styles/theme';
 import styled from 'styled-components';
 
-function FirstChart() {
+const FirstChart = () => {
   const [data, setData] = useState({
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
     datasets: [
@@ -22,7 +22,7 @@ function FirstChart() {
       <Line data={data} className='chart' />
     </StyledFirstChart>
   );
-}
+};
 
 const StyledFirstChart = styled.div`
   flex-direction: column;

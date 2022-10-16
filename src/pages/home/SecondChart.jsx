@@ -4,7 +4,7 @@ import { Pie } from 'react-chartjs-2';
 import { responsive, mainGreen } from '../../styles/theme';
 import styled from 'styled-components';
 
-function SecondChart() {
+const SecondChart = () => {
   const [data, setData] = useState({
     labels: ['10대', '20대', '30대', '40대', '50대 이상'],
     datasets: [
@@ -24,7 +24,7 @@ function SecondChart() {
       </div>
     </StyledSecondChart>
   );
-}
+};
 
 const StyledSecondChart = styled.div`
   flex-direction: column;

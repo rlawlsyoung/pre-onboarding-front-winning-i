@@ -1,25 +1,26 @@
+import { useState } from 'react';
 import { Dialog, TextField, createTheme } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { dialogOn } from '../../atom';
 import { mainGreen, clickedGreen } from '../../styles/theme';
 import styled from 'styled-components';
 
-const Login = ({ isLogin, setIsLogin }) => {
-  const handleDialog = () => setIsLogin(false);
+const Login = () => {
+  const [isDialogOn, setIsDialogOn] = useRecoilState(dialogOn);
+  const navigate = useNavigate();
+  const handleDialog = () => setIsDialogOn(false);
   const handleSubmit = e => {
     e.preventDefault();
   };
 
-  const theme = createTheme({
-    palette: {
-      neutral: {
-        main: '#64748B',
-        contrastText: '#fff',
-      },
-    },
-  });
+  const handleNavigate = () => {
+    navigate('/signup');
+    setIsDialogOn(false);
+  };
 
   return (
-    <LoginContainer open={isLogin} onClose={handleDialog}>
+    <LoginContainer open={isDialogOn} onClose={handleDialog}>
       <form className='login-form' onSubmit={handleSubmit}>
         <h2 className='title'>로그인</h2>
         <TextField
@@ -37,7 +38,7 @@ const Login = ({ isLogin, setIsLogin }) => {
         <button className='login-btn'>로그인</button>
 
         <p className='signup'>
-          아이디가 없다면? <Link>회원가입</Link>
+          아이디가 없다면? <a onClick={handleNavigate}>회원가입</a>
         </p>
       </form>
     </LoginContainer>
@@ -54,6 +55,7 @@ const LoginContainer = styled(Dialog)`
     height: 380px;
 
     .title {
+      margin-bottom: 10px;
       font-size: 20px;
       font-weight: 700;
     }
@@ -67,6 +69,7 @@ const LoginContainer = styled(Dialog)`
       background-color: ${mainGreen};
       color: white;
       font-family: 'Pretendard', sans-serif;
+      cursor: pointer;
 
       &:active {
         background-color: ${clickedGreen};
@@ -76,6 +79,11 @@ const LoginContainer = styled(Dialog)`
     .signup {
       margin-top: 20px;
       font-size: 14px;
+
+      a {
+        color: ${mainGreen};
+        cursor: pointer;
+      }
     }
   }
 `;

@@ -7,15 +7,13 @@ import { responsive } from '../../styles/theme';
 import styled from 'styled-components';
 
 const Header = () => {
-  const [openSide, setOpenSide] = useState(false);
-
   return (
     <HeaderContainer>
-      <MenuIcon openSide={openSide} setOpenSide={setOpenSide} />
+      <MenuIcon />
       <Link to='/'>
         <img src={wi} alt='위닝아이 로고' className='logo' />
       </Link>
-      <SideBar openSide={openSide} />
+      <SideBar />
     </HeaderContainer>
   );
 };

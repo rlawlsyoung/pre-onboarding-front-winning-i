@@ -1,8 +1,12 @@
 import { atom } from 'recoil';
 
-const dialogOn = atom({
-  key: 'dialogOn',
+const isDialogOnAtom = atom({
+  key: 'isDialogOn',
+  default: false,
+});
+const openSideAtom = atom({
+  key: 'openSide',
   default: false,
 });
 
-export { dialogOn };
+export { isDialogOnAtom, openSideAtom };

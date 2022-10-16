@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { Dialog, TextField, createTheme } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
-import { dialogOn } from '../../atom';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { isDialogOnAtom, openSideAtom } from '../../atom';
 import { mainGreen, clickedGreen } from '../../styles/theme';
 import styled from 'styled-components';
 
 const Login = () => {
-  const [isDialogOn, setIsDialogOn] = useRecoilState(dialogOn);
+  const [isDialogOn, setIsDialogOn] = useRecoilState(isDialogOnAtom);
+  const setOpenSide = useSetRecoilState(openSideAtom);
   const navigate = useNavigate();
   const handleDialog = () => setIsDialogOn(false);
   const handleSubmit = e => {
@@ -17,6 +18,7 @@ const Login = () => {
   const handleNavigate = () => {
     navigate('/signup');
     setIsDialogOn(false);
+    setOpenSide(false);
   };
 
   return (

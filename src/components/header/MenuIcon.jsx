@@ -1,6 +1,9 @@
+import { useRecoilState } from 'recoil';
+import { openSideAtom } from '../../atom';
 import styled from 'styled-components';
 
-const MenuIcon = ({ openSide, setOpenSide }) => {
+const MenuIcon = () => {
+  const [openSide, setOpenSide] = useRecoilState(openSideAtom);
   const handleMenu = () => {
     setOpenSide(!openSide);
   };

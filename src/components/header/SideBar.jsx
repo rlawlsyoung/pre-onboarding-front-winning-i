@@ -1,5 +1,5 @@
-import { useSetRecoilState } from 'recoil';
-import { dialogOn } from '../../atom';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { isDialogOnAtom, openSideAtom } from '../../atom';
 import { IoPersonCircleSharp } from 'react-icons/io5';
 import { FaRegClipboard, FaHome } from 'react-icons/fa';
 import { MdSettings } from 'react-icons/md';
@@ -28,8 +28,9 @@ const menuData = [
   },
 ];
 
-const SideBar = ({ openSide }) => {
-  const setIsDialogOn = useSetRecoilState(dialogOn);
+const SideBar = () => {
+  const setIsDialogOn = useSetRecoilState(isDialogOnAtom);
+  const openSide = useRecoilValue(openSideAtom);
 
   const handleLogin = () => {
     setIsDialogOn(true);

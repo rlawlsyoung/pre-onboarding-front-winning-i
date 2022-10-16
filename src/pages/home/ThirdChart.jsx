@@ -31,11 +31,15 @@ const StyledThirdChart = styled.div`
   font-weight: 700;
 
   .title {
-    margin-bottom: 65px;
+    margin-bottom: 75px;
   }
 
   @media ${responsive.tablet} {
     width: 80vw;
+
+    .title {
+      margin-bottom: 25px;
+    }
   }
 `;
 

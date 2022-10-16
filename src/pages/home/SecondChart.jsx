@@ -43,7 +43,7 @@ const StyledSecondChart = styled.div`
   @media ${responsive.tablet} {
     width: 80vw;
     .chart-container {
-      width: 40vw;
+      width: 60vw;
       margin-bottom: 50px;
     }
   }

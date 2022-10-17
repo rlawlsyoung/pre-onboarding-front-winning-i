@@ -5,6 +5,7 @@ import Header from './components/header/Header';
 import Login from './components/login/Login';
 import SignUp from './pages/signup/SignUp';
 import Home from './pages/home/Home';
+import MovePage from './components/MovePage';
 import { createTheme, ThemeProvider } from '@mui/material';
 import GlobalStyle from './styles/GlobalStyle';
 
@@ -22,6 +23,7 @@ function Router() {
       <BrowserRouter>
         <GlobalStyle />
         <RecoilRoot>
+          <MovePage />
           <Header />
           <Login />
           <Routes>

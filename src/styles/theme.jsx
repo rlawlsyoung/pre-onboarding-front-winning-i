@@ -1,5 +1,5 @@
 const mainBlack = 'black';
-const mainGray = '#959595';
+const mainGray = '#858585';
 const menuGray = '#f8f9fa';
 
 const responsive = {

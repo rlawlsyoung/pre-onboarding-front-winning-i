@@ -15,4 +15,9 @@ const openSideAtom = atom({
   default: false,
 });
 
-export { isLoginAtom, isDialogOnAtom, openSideAtom };
+const userDataAtom = atom({
+  key: 'userData',
+  default: [],
+});
+
+export { isLoginAtom, isDialogOnAtom, openSideAtom, userDataAtom };

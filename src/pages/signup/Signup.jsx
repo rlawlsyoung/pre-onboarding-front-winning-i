@@ -1,11 +1,14 @@
 import { useState } from 'react';
-import { useSetRecoilState } from 'recoil';
-import { openSideAtom } from '../../atom';
+import { useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { userDataAtom } from '../../atom';
 import { TextField, Checkbox } from '@mui/material';
 import { mainGray, mainBlack, responsive } from '../../styles/theme';
 import styled from 'styled-components';
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const [userData, setUserData] = useRecoilState(userDataAtom);
   const [nameValue, setNameValue] = useState('');
   const [emailValue, setEmailValue] = useState('');
   const [pwValue, setPwValue] = useState('');
@@ -17,11 +20,22 @@ const SignUp = () => {
   const passwordRegEx = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/;
   const btnDisabled = !nameValue || !isEmailValid || !isPwValid || !checkboxOn;
 
+  console.log(userData);
+
   const handleName = e => setNameValue(e.target.value);
+
+  let timer;
   const handleEmail = e => {
-    setEmailValue(e.target.value);
-    setIsEmailValid(emailRegEx.test(e.target.value));
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      setEmailValue(e.target.value);
+      const checkDuplicate = userData.every(
+        el => el.userInfo.email != e.target.value
+      );
+      setIsEmailValid(emailRegEx.test(e.target.value) && checkDuplicate);
+    }, 500);
   };
+
   const handlePw = e => {
     setPwValue(e.target.value);
     setIsPwValid(passwordRegEx.test(e.target.value));
@@ -31,8 +45,7 @@ const SignUp = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-
-    alert(123);
+    navigate('/');
   };
   return (
     <StyledSignUp>
@@ -73,7 +86,7 @@ const SignUp = () => {
         <p className='alert'>
           {isEmailValid
             ? '사용 가능한 이메일입니다.'
-            : '이메일 조건에 맞지 않습니다.'}
+            : '중복되거나 이메일 조건에 맞지 않습니다.'}
         </p>
         <TextField
           sx={{ m: 1.5 }}

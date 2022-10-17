@@ -1,15 +1,11 @@
 import { Link } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
-import { openSideAtom } from '../../atom';
 import { mainBlack } from '../../styles/theme';
 import styled from 'styled-components';
 
 const SideBarMenu = ({ icon, title, link }) => {
-  const setOpenSide = useSetRecoilState(openSideAtom);
-  const handleClick = () => setOpenSide(false);
   return (
     <Link to={link}>
-      <SideBarMenuContainer className='flex-center hover' onClick={handleClick}>
+      <SideBarMenuContainer className='flex-center hover'>
         {icon} <h2>{title}</h2>
       </SideBarMenuContainer>
     </Link>

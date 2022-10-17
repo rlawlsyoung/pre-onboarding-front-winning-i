@@ -1,6 +1,6 @@
 import Chart from 'chart.js/auto';
 import { Pie } from 'react-chartjs-2';
-import { responsive, mainGreen } from '../../styles/theme';
+import { responsive, mainGray } from '../../styles/theme';
 import styled from 'styled-components';
 
 const SecondChart = () => {
@@ -8,9 +8,15 @@ const SecondChart = () => {
     labels: ['10대', '20대', '30대', '40대', '50대 이상'],
     datasets: [
       {
-        label: '방문자 수',
-        data: [33, 53, 85, 41, 44],
-        borderColor: mainGreen,
+        data: [12, 44, 32, 10, 2],
+        backgroundColor: [
+          '#e5e5e5',
+          '#d5d5d5',
+          '#c5c5c5',
+          '#b5b5b5',
+          '#a5a5a5',
+        ],
+        borderColor: '#858585',
       },
     ],
   };

@@ -3,12 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Dialog, TextField, createTheme } from '@mui/material';
 import { isDialogOnAtom, openSideAtom } from '../../atom';
-import {
-  mainGreen,
-  deepGreen,
-  mainBlack,
-  responsive,
-} from '../../styles/theme';
+import { mainGray, mainBlack, responsive } from '../../styles/theme';
 import styled from 'styled-components';
 
 const Login = () => {
@@ -32,7 +27,7 @@ const Login = () => {
         <h2 className='title'>로그인</h2>
         <TextField
           className='input'
-          sx={{ m: 1.5 }}
+          sx={{ m: 2 }}
           type='text'
           label='이메일'
           color='success'
@@ -100,7 +95,7 @@ const LoginContainer = styled(Dialog)`
       font-size: 14.5px;
 
       a {
-        color: ${mainGreen};
+        color: ${mainGray};
         cursor: pointer;
       }
     }

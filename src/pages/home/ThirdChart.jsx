@@ -1,6 +1,6 @@
 import Chart from 'chart.js/auto';
 import { Bar } from 'react-chartjs-2';
-import { responsive, mainGreen } from '../../styles/theme';
+import { responsive, mainGray } from '../../styles/theme';
 import styled from 'styled-components';
 
 const ThirdChart = () => {
@@ -10,7 +10,7 @@ const ThirdChart = () => {
       {
         label: '게시글 수',
         data: [5, 11, 12, 8, 4, 2],
-        backgroundColor: mainGreen,
+        backgroundColor: '#c5c5c5',
       },
     ],
   };

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import MenuIcon from './MenuIcon';
 import SideBar from './SideBar';
-import wi from '../../assets/wi.svg';
+import wi from '../../assets/img/wi.svg';
 import { responsive, mainBlack } from '../../styles/theme';
 import styled from 'styled-components';
 

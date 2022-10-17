@@ -4,7 +4,7 @@ import SideBarMenu from './SideBarMenu';
 import { IoPersonCircleSharp } from 'react-icons/io5';
 import { FaRegClipboard, FaHome } from 'react-icons/fa';
 import { MdSettings } from 'react-icons/md';
-import { mainGray } from '../../styles/theme';
+import { menuGray } from '../../styles/theme';
 import styled from 'styled-components';
 
 const menuData = [
@@ -71,7 +71,7 @@ const SideBarContainer = styled.div`
   height: 100%;
   width: 300px;
   box-shadow: 6px 0 5px -5px gray;
-  background-color: ${mainGray};
+  background-color: ${menuGray};
   transition: 0.3s;
   transform: translateX(${({ openSide }) => (openSide ? '0%' : '-102%')});
   z-index: 20;

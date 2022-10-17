@@ -1,6 +1,6 @@
 import Chart from 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
-import { responsive, mainGreen } from '../../styles/theme';
+import { responsive, mainGray } from '../../styles/theme';
 import styled from 'styled-components';
 
 const FirstChart = () => {
@@ -10,7 +10,7 @@ const FirstChart = () => {
       {
         label: '방문자 수',
         data: [33, 53, 85, 41, 44, 65],
-        borderColor: mainGreen,
+        borderColor: mainGray,
       },
     ],
   };

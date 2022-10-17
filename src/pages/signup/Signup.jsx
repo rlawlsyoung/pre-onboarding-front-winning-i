@@ -2,12 +2,7 @@ import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { openSideAtom } from '../../atom';
 import { TextField, Checkbox } from '@mui/material';
-import {
-  mainGreen,
-  mainBlack,
-  clickedGreen,
-  responsive,
-} from '../../styles/theme';
+import { mainGray, mainBlack, responsive } from '../../styles/theme';
 import styled from 'styled-components';
 
 const SignUp = () => {
@@ -155,8 +150,8 @@ const StyledSignUp = styled.div`
     .provision {
       margin-top: 30px;
       a {
-        border-bottom: 1px solid ${mainGreen};
-        color: ${mainGreen};
+        border-bottom: 1px solid ${mainGray};
+        color: ${mainGray};
         cursor: pointer;
       }
     }

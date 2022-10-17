@@ -1,14 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { isDialogOnAtom, userDataAtom, currentUserAtom } from '../../atom';
+import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
+import {
+  isDialogOnAtom,
+  userDataAtom,
+  currentUserAtom,
+  openSideAtom,
+} from '../../atom';
 import { Dialog, TextField } from '@mui/material';
 import { mainGray, mainBlack, responsive } from '../../styles/theme';
 import styled from 'styled-components';
 
 const Login = () => {
   const [isDialogOn, setIsDialogOn] = useRecoilState(isDialogOnAtom);
-  const [currentUser, setCurrentUser] = useRecoilState(currentUserAtom);
+  const setCurrentUser = useSetRecoilState(currentUserAtom);
+  const setOpenSide = useSetRecoilState(openSideAtom);
   const userData = useRecoilValue(userDataAtom);
   const [emailValue, setEmailValue] = useState('');
   const [pwValue, setPwValue] = useState('');
@@ -18,6 +24,8 @@ const Login = () => {
 
   const handleEmail = e => setEmailValue(e.target.value);
   const handlePw = e => setPwValue(e.target.value);
+
+  useEffect(() => setAlertMessage(''), [isDialogOn]);
 
   const handleNavigate = () => {
     navigate('/signup');
@@ -38,6 +46,7 @@ const Login = () => {
         setCurrentUser(relevantUser[0]);
         localStorage.setItem('id', relevantUser[0].userInfo.id);
         setIsDialogOn(false);
+        setOpenSide(false);
         navigate('/');
       }
     }
@@ -74,9 +83,18 @@ const Login = () => {
         />
         <p className='alert'>{alertMessage}</p>
         <button className='login-btn'>로그인</button>
-
         <p className='sign-up'>
           아이디가 없다면? <a onClick={handleNavigate}>회원가입</a>
+        </p>
+
+        <p className='sign'>
+          <p className='sign-up-sign'>
+            회원가입도 가능하지만, 새로운 아이디는 state로 관리하기 때문에
+            새로고침하면 아이디가 사라집니다. 때문에 항상 사용 가능한 아이디를
+            준비했습니다.
+          </p>
+          <p className='id'>ID : test1@test.com (test1부터 4까지)</p>
+          <p className='pw'>PW : 1q2w3e4r</p>
         </p>
       </form>
     </LoginContainer>
@@ -90,7 +108,7 @@ const LoginContainer = styled(Dialog)`
     align-items: center;
     justify-content: center;
     width: 480px;
-    height: 340px;
+    height: 420px;
     padding: 20px;
 
     .title {
@@ -124,11 +142,25 @@ const LoginContainer = styled(Dialog)`
 
     .sign-up {
       margin-top: 20px;
-      font-size: 14.5px;
+      font-size: 15px;
+      font-weight: 700;
 
       a {
+        border-bottom: 1px solid ${mainGray};
         color: ${mainGray};
         cursor: pointer;
+      }
+    }
+
+    .sign {
+      margin-top: 15px;
+      color: ${mainGray};
+      text-align: center;
+      font-size: 12.75px;
+      font-weight: 700;
+
+      .id {
+        margin-top: 5px;
       }
     }
   }

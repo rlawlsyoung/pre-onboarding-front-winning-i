@@ -1,5 +1,6 @@
-import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { isDialogOnAtom, openSideAtom } from '../../atom';
+import { useNavigate } from 'react-router-dom';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { isDialogOnAtom, openSideAtom, currentUserAtom } from '../../atom';
 import SideBarMenu from './SideBarMenu';
 import { IoPersonCircleSharp } from 'react-icons/io5';
 import { FaRegClipboard, FaHome } from 'react-icons/fa';
@@ -29,11 +30,18 @@ const menuData = [
 ];
 
 const SideBar = () => {
+  const navigate = useNavigate();
   const setIsDialogOn = useSetRecoilState(isDialogOnAtom);
-  const openSide = useRecoilValue(openSideAtom);
+  const [openSide, setOpenSide] = useRecoilState(openSideAtom);
+  const [currentUser, setCurrentUser] = useRecoilState(currentUserAtom);
 
-  const handleLogin = () => {
-    setIsDialogOn(true);
+  const handleLoginOut = () => {
+    if (currentUser) {
+      setCurrentUser(null);
+      localStorage.removeItem('id');
+      setOpenSide(false);
+      navigate('/');
+    } else setIsDialogOn(true);
   };
 
   return (
@@ -41,7 +49,14 @@ const SideBar = () => {
       <div className='profile-box'>
         <div className='user-info flex-center'>
           <IoPersonCircleSharp size={35} />
-          <p className='user-name'>Username 1</p> 님, 환영합니다!
+          {currentUser ? (
+            <>
+              <p className='user-name'>{currentUser.userInfo.name}</p> 님,
+              환영합니다!
+            </>
+          ) : (
+            <p className='user-name'>로그인 후 이용해주세요.</p>
+          )}
         </div>
       </div>
       <ul className='side-body'>
@@ -54,8 +69,8 @@ const SideBar = () => {
           />
         ))}
       </ul>
-      <button className='logout flex-center hover' onClick={handleLogin}>
-        로그아웃
+      <button className='logout flex-center hover' onClick={handleLoginOut}>
+        {currentUser ? '로그아웃' : '로그인'}
       </button>
     </SideBarContainer>
   );

@@ -89,8 +89,8 @@ const Login = () => {
 
         <p className='sign'>
           <p className='sign-up-sign'>
-            회원가입도 가능하지만, 새로운 아이디는 state로 관리하기 때문에
-            새로고침하면 아이디가 사라집니다. 때문에 항상 사용 가능한 아이디를
+            회원가입도 가능하지만, 새로운 아이디는 로컬스토리지로 관리하기
+            때문에 기기를 바꾸면 사라집니다. 때문에 항상 사용 가능한 아이디를
             준비했습니다.
           </p>
           <p className='id'>ID : test1@test.com (test1부터 4까지)</p>
@@ -148,6 +148,7 @@ const LoginContainer = styled(Dialog)`
       a {
         border-bottom: 1px solid ${mainGray};
         color: ${mainGray};
+        font-size: 16px;
         cursor: pointer;
       }
     }

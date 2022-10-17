@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { useSetRecoilState, useRecoilState } from 'recoil';
 import { userDataAtom, currentUserAtom } from '../../atom';
 import MenuIcon from './MenuIcon';
 import SideBar from './SideBar';
@@ -10,14 +10,16 @@ import styled from 'styled-components';
 
 const Header = () => {
   const setCurrentUser = useSetRecoilState(currentUserAtom);
-  const userData = useRecoilValue(userDataAtom);
+  const [userData, setUserData] = useRecoilState(userDataAtom);
 
   useEffect(() => {
     const id = localStorage.getItem('id');
     if (id) {
       const relevantUser = userData.filter(el => el.userInfo.id === Number(id));
       setCurrentUser(relevantUser[0]);
-      console.log(relevantUser[0]);
+    }
+    if (localStorage.getItem('userData')) {
+      setUserData(JSON.parse(localStorage.getItem('userData')));
     }
   }, []);
 

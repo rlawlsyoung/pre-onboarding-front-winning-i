@@ -43,24 +43,26 @@ const SignUp = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    setUserData([
-      ...userData,
-      {
-        userInfo: {
-          id: userData[userData.length - 1].userInfo.id + 1,
-          name: nameValue,
-          email: emailValue,
-          password: pwValue,
-        },
-        chartData: {
-          data1: [33, 53, 85, 41, 44, 0],
-          data2: [12, 44, 32, 10, 2],
-          data3: [5, 11, 12, 8, 4, 0],
-        },
+    const newUserData = {
+      userInfo: {
+        id: userData[userData.length - 1].userInfo.id + 1,
+        name: nameValue,
+        email: emailValue,
+        password: pwValue,
       },
-    ]);
+      chartData: {
+        data1: [33, 53, 85, 41, 44, 0],
+        data2: [12, 44, 32, 10, 2],
+        data3: [5, 11, 12, 8, 4, 0],
+      },
+    };
+    setUserData([...userData, newUserData]);
     alert('회원가입이 완료되었습니다.');
     navigate('/');
+    localStorage.setItem(
+      'userData',
+      JSON.stringify([...userData, newUserData])
+    );
   };
   return (
     <StyledSignUp>

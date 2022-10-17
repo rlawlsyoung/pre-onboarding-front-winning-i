@@ -21,9 +21,9 @@ const Home = () => {
       </div>
       {currentUser ? (
         <div className='chart-container flex-center'>
-          <FirstChart />
-          <SecondChart />
-          <ThirdChart />
+          <FirstChart chartData={currentUser.chartData.data1} />
+          <SecondChart chartData={currentUser.chartData.data2} />
+          <ThirdChart chartData={currentUser.chartData.data3} />
         </div>
       ) : (
         <div className='login-sign flex-center'>

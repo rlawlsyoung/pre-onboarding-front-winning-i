@@ -3,13 +3,13 @@ import { Line } from 'react-chartjs-2';
 import { responsive, mainGray } from '../../styles/theme';
 import styled from 'styled-components';
 
-const FirstChart = () => {
+const FirstChart = ({ chartData }) => {
   const data = {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
     datasets: [
       {
         label: '방문자 수',
-        data: [33, 53, 85, 41, 44, 65],
+        data: chartData,
         borderColor: mainGray,
       },
     ],

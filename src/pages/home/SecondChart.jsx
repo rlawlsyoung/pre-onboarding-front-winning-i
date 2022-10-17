@@ -3,12 +3,12 @@ import { Pie } from 'react-chartjs-2';
 import { responsive, mainGray } from '../../styles/theme';
 import styled from 'styled-components';
 
-const SecondChart = () => {
+const SecondChart = ({ chartData }) => {
   const data = {
     labels: ['10대', '20대', '30대', '40대', '50대 이상'],
     datasets: [
       {
-        data: [12, 44, 32, 10, 2],
+        data: chartData,
         backgroundColor: [
           '#e5e5e5',
           '#d5d5d5',

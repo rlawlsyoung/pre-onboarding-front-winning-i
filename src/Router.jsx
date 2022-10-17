@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import Header from './components/header/Header';
@@ -24,12 +23,12 @@ function Router() {
         <GlobalStyle />
         <RecoilRoot>
           <MovePage />
-          <Header />
           <Login />
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/signup' element={<SignUp />} />
           </Routes>
+          <Header />
         </RecoilRoot>
       </BrowserRouter>
     </ThemeProvider>

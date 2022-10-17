@@ -20,8 +20,6 @@ const SignUp = () => {
   const passwordRegEx = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/;
   const btnDisabled = !nameValue || !isEmailValid || !isPwValid || !checkboxOn;
 
-  console.log(userData);
-
   const handleName = e => setNameValue(e.target.value);
 
   let timer;
@@ -45,6 +43,23 @@ const SignUp = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    setUserData([
+      ...userData,
+      {
+        userInfo: {
+          id: userData[userData.length - 1].userInfo.id + 1,
+          name: nameValue,
+          email: emailValue,
+          password: pwValue,
+        },
+        chartData: {
+          data1: [33, 53, 85, 41, 44, 0],
+          data2: [12, 44, 32, 10, 2],
+          data3: [5, 11, 12, 8, 4, 0],
+        },
+      },
+    ]);
+    alert('회원가입이 완료되었습니다.');
     navigate('/');
   };
   return (
@@ -151,6 +166,7 @@ const StyledSignUp = styled.div`
 
     .input {
       width: 100%;
+      z-index: 0;
     }
 
     .alert {

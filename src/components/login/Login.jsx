@@ -1,22 +1,46 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { isDialogOnAtom, userDataAtom, currentUserAtom } from '../../atom';
 import { Dialog, TextField } from '@mui/material';
-import { isDialogOnAtom } from '../../atom';
 import { mainGray, mainBlack, responsive } from '../../styles/theme';
 import styled from 'styled-components';
 
 const Login = () => {
   const [isDialogOn, setIsDialogOn] = useRecoilState(isDialogOnAtom);
+  const [currentUser, setCurrentUser] = useRecoilState(currentUserAtom);
+  const userData = useRecoilValue(userDataAtom);
+  const [emailValue, setEmailValue] = useState('');
+  const [pwValue, setPwValue] = useState('');
+  const [alertMessage, setAlertMessage] = useState('');
   const navigate = useNavigate();
   const handleDialog = () => setIsDialogOn(false);
-  const handleSubmit = e => {
-    e.preventDefault();
-  };
+
+  const handleEmail = e => setEmailValue(e.target.value);
+  const handlePw = e => setPwValue(e.target.value);
 
   const handleNavigate = () => {
     navigate('/signup');
     setIsDialogOn(false);
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    const relevantUser = userData.filter(
+      el => el.userInfo.email === emailValue
+    );
+    if (!relevantUser.length) {
+      setAlertMessage('존재하지 않는 아이디입니다.');
+    } else {
+      if (relevantUser[0].userInfo.password !== pwValue) {
+        setAlertMessage('패스워드가 일치하지 않습니다.');
+      } else {
+        setCurrentUser(relevantUser[0]);
+        localStorage.setItem('id', relevantUser[0].userInfo.id);
+        setIsDialogOn(false);
+        navigate('/');
+      }
+    }
   };
 
   return (
@@ -34,6 +58,7 @@ const Login = () => {
           inputProps={{
             maxLength: 24,
           }}
+          onChange={handleEmail}
         />
         <TextField
           className='input'
@@ -45,7 +70,9 @@ const Login = () => {
           inputProps={{
             maxLength: 16,
           }}
+          onChange={handlePw}
         />
+        <p className='alert'>{alertMessage}</p>
         <button className='login-btn'>로그인</button>
 
         <p className='sign-up'>
@@ -76,10 +103,17 @@ const LoginContainer = styled(Dialog)`
       width: 100%;
     }
 
+    .alert {
+      height: 8.563px;
+      margin-top: 10px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
     .login-btn {
       height: 40px;
       width: 100%;
-      margin-top: 25px;
+      margin-top: 15px;
       border: none;
       border-radius: 3px;
       background-color: ${mainBlack};

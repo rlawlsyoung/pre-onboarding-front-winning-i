@@ -1,9 +1,5 @@
 import { atom } from 'recoil';
-
-const isLoginAtom = atom({
-  key: 'isLogin',
-  default: false,
-});
+import userData from './assets/data/userData';
 
 const isDialogOnAtom = atom({
   key: 'isDialogOn',
@@ -17,7 +13,12 @@ const openSideAtom = atom({
 
 const userDataAtom = atom({
   key: 'userData',
-  default: [],
+  default: userData,
 });
 
-export { isLoginAtom, isDialogOnAtom, openSideAtom, userDataAtom };
+const currentUserAtom = atom({
+  key: 'currentUser',
+  default: null,
+});
+
+export { isDialogOnAtom, openSideAtom, userDataAtom, currentUserAtom };

@@ -4,18 +4,11 @@ import { userDataAtom } from '../../atom';
 import FirstChart from './FirstChart';
 import SecondChart from './SecondChart';
 import ThirdChart from './ThirdChart';
-import userData from '../../assets/data/userData';
 import { IoPersonCircleSharp } from 'react-icons/io5';
 import { responsive } from '../../styles/theme';
 import styled from 'styled-components';
 
 const Home = () => {
-  const setUserData = useSetRecoilState(userDataAtom);
-
-  useEffect(() => {
-    setUserData(userData);
-  }, []);
-
   return (
     <HomeContainer>
       <div className='profile-box flex-center'>

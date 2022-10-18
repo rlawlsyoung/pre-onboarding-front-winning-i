@@ -1,21 +1,35 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useSetRecoilState, useRecoilState } from 'recoil';
+import { userDataAtom, currentUserAtom } from '../../atom';
 import MenuIcon from './MenuIcon';
 import SideBar from './SideBar';
-import wi from '../../assets/wi.svg';
-import { responsive } from '../../styles/theme';
+import wi from '../../assets/img/wi.svg';
+import { responsive, mainBlack } from '../../styles/theme';
 import styled from 'styled-components';
 
 const Header = () => {
-  const [openSide, setOpenSide] = useState(false);
+  const setCurrentUser = useSetRecoilState(currentUserAtom);
+  const [userData, setUserData] = useRecoilState(userDataAtom);
+
+  useEffect(() => {
+    const id = localStorage.getItem('id');
+    if (id) {
+      const relevantUser = userData.filter(el => el.userInfo.id === Number(id));
+      setCurrentUser(relevantUser[0]);
+    }
+    if (localStorage.getItem('userData')) {
+      setUserData(JSON.parse(localStorage.getItem('userData')));
+    }
+  }, []);
 
   return (
     <HeaderContainer>
-      <MenuIcon openSide={openSide} setOpenSide={setOpenSide} />
+      <MenuIcon />
       <Link to='/'>
         <img src={wi} alt='위닝아이 로고' className='logo' />
       </Link>
-      <SideBar openSide={openSide} />
+      <SideBar />
     </HeaderContainer>
   );
 };
@@ -29,7 +43,7 @@ const HeaderContainer = styled.div`
   align-items: center;
   justify-content: center;
   padding: 15px;
-  background-color: black;
+  background-color: ${mainBlack};
 
   .flex-center {
     display: flex;

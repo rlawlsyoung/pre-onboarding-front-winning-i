@@ -1,30 +1,29 @@
-import { useState } from 'react';
 import Chart from 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
-import { responsive, mainGreen } from '../../styles/theme';
+import { responsive, mainGray } from '../../styles/theme';
 import styled from 'styled-components';
 
-function FirstChart() {
-  const [data, setData] = useState({
+const FirstChart = ({ chartData }) => {
+  const data = {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
     datasets: [
       {
         label: '방문자 수',
-        data: [33, 53, 85, 41, 44, 65],
-        borderColor: mainGreen,
+        data: chartData,
+        borderColor: mainGray,
       },
     ],
-  });
+  };
 
   return (
-    <StyledFirstChart className='flex-center'>
+    <FirstChartContainer className='flex-center'>
       <h2 className='title'>월별 내 게시글 조회수</h2>
       <Line data={data} className='chart' />
-    </StyledFirstChart>
+    </FirstChartContainer>
   );
-}
+};
 
-const StyledFirstChart = styled.div`
+const FirstChartContainer = styled.div`
   flex-direction: column;
   width: calc(93vw / 3);
   font-size: 24px;

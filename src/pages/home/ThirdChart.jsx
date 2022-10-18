@@ -1,30 +1,29 @@
-import { useState } from 'react';
 import Chart from 'chart.js/auto';
 import { Bar } from 'react-chartjs-2';
-import { responsive, mainGreen } from '../../styles/theme';
+import { responsive, mainGray } from '../../styles/theme';
 import styled from 'styled-components';
 
-function ThirdChart() {
-  const [data, setData] = useState({
+const ThirdChart = ({ chartData }) => {
+  const data = {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
     datasets: [
       {
         label: '게시글 수',
-        data: [5, 11, 12, 8, 4, 2],
-        borderColor: mainGreen,
+        data: chartData,
+        backgroundColor: '#c5c5c5',
       },
     ],
-  });
+  };
 
   return (
-    <StyledThirdChart className='flex-center'>
+    <ThirdChartContainer className='flex-center'>
       <h2 className='title'>월별 게시글 등록 수</h2>
       <Bar data={data} className='chart' />
-    </StyledThirdChart>
+    </ThirdChartContainer>
   );
-}
+};
 
-const StyledThirdChart = styled.div`
+const ThirdChartContainer = styled.div`
   flex-direction: column;
   width: calc(93vw / 3);
   font-size: 24px;

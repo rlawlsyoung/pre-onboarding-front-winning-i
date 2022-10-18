@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { mainBlack } from '../../styles/theme';
 import styled from 'styled-components';
 
 const SideBarMenu = ({ icon, title, link }) => {
@@ -14,7 +15,7 @@ const SideBarMenu = ({ icon, title, link }) => {
 const SideBarMenuContainer = styled.li`
   height: 80px;
   margin: 10px 0;
-  color: black;
+  color: ${mainBlack};
   cursor: pointer;
 
   h2 {

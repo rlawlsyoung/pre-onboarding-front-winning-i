@@ -87,7 +87,7 @@ const Login = () => {
           아이디가 없다면? <a onClick={handleNavigate}>회원가입</a>
         </p>
 
-        <p className='sign'>
+        <div className='sign'>
           <p className='sign-up-sign'>
             회원가입도 가능하지만, 새로운 아이디는 로컬스토리지로 관리하기
             때문에 기기를 바꾸면 사라집니다. 때문에 항상 사용 가능한 아이디를
@@ -95,7 +95,7 @@ const Login = () => {
           </p>
           <p className='id'>ID : test1@test.com (test1부터 4까지)</p>
           <p className='pw'>PW : 1q2w3e4r</p>
-        </p>
+        </div>
       </form>
     </LoginContainer>
   );

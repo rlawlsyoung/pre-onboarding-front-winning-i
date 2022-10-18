@@ -13,13 +13,16 @@ const Header = () => {
   const [userData, setUserData] = useRecoilState(userDataAtom);
 
   useEffect(() => {
-    const id = localStorage.getItem('id');
-    if (id) {
-      const relevantUser = userData.filter(el => el.userInfo.id === Number(id));
+    const localId = localStorage.getItem('id');
+    const localUserData = localStorage.getItem('userData');
+    if (localId) {
+      const relevantUser = userData.filter(
+        el => el.userInfo.id === Number(localId)
+      );
       setCurrentUser(relevantUser[0]);
     }
-    if (localStorage.getItem('userData')) {
-      setUserData(JSON.parse(localStorage.getItem('userData')));
+    if (localUserData) {
+      setUserData(JSON.parse(localUserData));
     }
   }, []);
 

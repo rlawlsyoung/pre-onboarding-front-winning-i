@@ -1,4 +1,4 @@
-import { mainBlack, responsive } from '../../styles/theme';
+import { mainBlack, mainGray, responsive } from '../../styles/theme';
 import styled from 'styled-components';
 
 const PostBar = ({ data }) => {
@@ -6,7 +6,7 @@ const PostBar = ({ data }) => {
   return (
     <PostBarContainer>
       <div className='wrapper flex-center'>
-        <p className='post-id'>{data.postId}</p>
+        <p className='post-id flex-center'>{data.postId}</p>
         <h3 className='post-title'>{data.title}</h3>
       </div>
       <div className='wrapper flex-center'>
@@ -23,12 +23,32 @@ const PostBarContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   height: 50px;
-  width: 720px;
-  border-bottom: 1px solid ${mainBlack};
-  color: black;
+  width: 810px;
+  border-bottom: 1px solid ${mainGray};
+  color: ${mainBlack};
+
+  .post-id {
+    width: 15px;
+    margin: 0 10px;
+    font-size: 14px;
+  }
+
+  .post-title {
+    font-weight: 700;
+  }
+
+  .post-writer {
+    font-size: 14px;
+  }
+
+  .post-date {
+    margin: 0 10px;
+    color: ${mainGray};
+    font-size: 14px;
+  }
 
   @media ${responsive.tablet} {
-    width: 80vw;
+    width: 90vw;
   } ;
 `;
 

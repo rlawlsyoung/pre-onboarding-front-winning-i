@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { postDataAtom } from '../../atom';
 import PostBar from './PostBar';
+import { responsive, mainGray } from '../../styles/theme';
 import { Stack, Pagination } from '@mui/material';
 import styled from 'styled-components';
 
@@ -34,8 +35,18 @@ const Board = () => {
     <BoardContainer>
       <h2 className='title'>게시판</h2>
       <Stack alignItems='center'>
-        <Stack direction='column' className='post-container'>
-          {data.reverse().map(el => {
+        <div className='board-head'>
+          <div className='wrapper flex-center'>
+            <p className='post-id flex-center'>번호</p>
+            <h3 className='post-title'>제목</h3>
+          </div>
+          <div className='wrapper flex-center'>
+            <p className='post-writer flex-center'>작성자</p>
+            <p className='post-date flex-center'>작성일</p>
+          </div>
+        </div>
+        <Stack direction='column'>
+          {data.map(el => {
             return (
               <Stack className='stack' key={el.postId}>
                 <Link to={`/detail/${el.postId}`}>
@@ -50,7 +61,7 @@ const Board = () => {
           count={lastPage}
           color='success'
           size='large'
-          onChange={(e, n) => handlePage(e, n)}
+          onChange={handlePage}
         />
       </Stack>
     </BoardContainer>
@@ -76,15 +87,35 @@ const BoardContainer = styled.div`
     font-weight: 700;
   }
 
-  .post-container {
-    border: 1px solid black;
-    border-bottom: none;
+  .board-head {
+    display: flex;
+    justify-content: space-between;
+    width: 810px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid ${mainGray};
+    color: ${mainGray};
+    font-size: 13px;
+    font-weight: 700;
+
+    .post-id {
+      width: 35px;
+    }
+
+    .post-date {
+      width: 91.55px;
+    }
   }
 
   .pagination {
     position: absolute;
     bottom: 60px;
   }
+
+  @media ${responsive.tablet} {
+    .board-head {
+      width: 90vw;
+    }
+  } ;
 `;
 
 export default Board;

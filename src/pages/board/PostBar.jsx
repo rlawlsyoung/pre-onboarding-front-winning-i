@@ -1,8 +1,7 @@
-import { mainBlack, mainGray, responsive } from '../../styles/theme';
+import { lightGray, mainBlack, mainGray, responsive } from '../../styles/theme';
 import styled from 'styled-components';
 
 const PostBar = ({ data }) => {
-  console.log(data);
   return (
     <PostBarContainer>
       <div className='wrapper flex-center'>
@@ -26,6 +25,10 @@ const PostBarContainer = styled.div`
   width: 810px;
   border-bottom: 1px solid ${mainGray};
   color: ${mainBlack};
+
+  &:hover {
+    background-color: ${lightGray};
+  }
 
   .post-id {
     width: 15px;

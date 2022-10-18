@@ -5,7 +5,7 @@ import SideBarMenu from './SideBarMenu';
 import { IoPersonCircleSharp } from 'react-icons/io5';
 import { FaRegClipboard, FaHome } from 'react-icons/fa';
 import { MdSettings } from 'react-icons/md';
-import { menuGray } from '../../styles/theme';
+import { menuGray, lightGray } from '../../styles/theme';
 import styled from 'styled-components';
 
 const menuData = [
@@ -94,7 +94,7 @@ const SideBarContainer = styled.div`
   .hover {
     cursor: pointer;
     &:hover {
-      background-color: #e9e9e9;
+      background-color: ${lightGray};
     }
   }
 

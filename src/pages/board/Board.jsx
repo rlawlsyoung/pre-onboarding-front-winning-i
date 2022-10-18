@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-import { postDataAtom } from '../../atom';
+import { useRecoilValue, useRecoilState } from 'recoil';
+import { postDataAtom, pageAtom } from '../../atom';
 import PostBar from './PostBar';
 import { responsive, mainGray } from '../../styles/theme';
 import { Stack, Pagination } from '@mui/material';
@@ -16,7 +16,7 @@ const Board = () => {
       : parseInt(postData.length / 5) + 1;
 
   const firstPageData = postData.slice(postData.length - 5, postData.length);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useRecoilState(pageAtom);
   const [data, setData] = useState(firstPageData);
 
   useEffect(() => {
@@ -59,6 +59,7 @@ const Board = () => {
         <Pagination
           className='pagination'
           count={lastPage}
+          defaultPage={page}
           color='success'
           size='large'
           onChange={handlePage}
@@ -82,7 +83,7 @@ const BoardContainer = styled.div`
   }
 
   .title {
-    margin-bottom: 50px;
+    margin-bottom: 55px;
     font-size: 28px;
     font-weight: 700;
   }
@@ -108,7 +109,7 @@ const BoardContainer = styled.div`
 
   .pagination {
     position: absolute;
-    bottom: 60px;
+    bottom: 70px;
   }
 
   @media ${responsive.tablet} {

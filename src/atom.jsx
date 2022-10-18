@@ -33,6 +33,11 @@ const commentDataAtom = atom({
   default: commentData,
 });
 
+const pageAtom = atom({
+  key: 'page',
+  default: 1,
+});
+
 export {
   isDialogOnAtom,
   openSideAtom,
@@ -40,4 +45,5 @@ export {
   currentUserAtom,
   postDataAtom,
   commentDataAtom,
+  pageAtom,
 };

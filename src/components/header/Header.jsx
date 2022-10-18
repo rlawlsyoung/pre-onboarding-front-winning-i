@@ -11,20 +11,24 @@ import styled from 'styled-components';
 const Header = () => {
   const setCurrentUser = useSetRecoilState(currentUserAtom);
   const [userData, setUserData] = useRecoilState(userDataAtom);
-
+  const localUserData = localStorage.getItem('userData');
+  const localId = localStorage.getItem('id');
   useEffect(() => {
-    const localId = localStorage.getItem('id');
-    const localUserData = localStorage.getItem('userData');
-    if (localId) {
-      const relevantUser = userData.filter(
-        el => el.userInfo.id === Number(localId)
-      );
-      setCurrentUser(relevantUser[0]);
-    }
+    console.log(localId);
     if (localUserData) {
       setUserData(JSON.parse(localUserData));
     }
   }, []);
+
+  useEffect(() => {
+    if (localId) {
+      const relevantUser = userData.filter(
+        el => el.userInfo.id === Number(localId)
+      );
+      console.log(relevantUser[0]);
+      setCurrentUser(relevantUser[0]);
+    }
+  }, [userData]);
 
   return (
     <HeaderContainer>

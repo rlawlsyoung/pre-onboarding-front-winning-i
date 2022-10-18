@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { postDataAtom, commentDataAtom, currentUserAtom } from '../../atom';
 import DetailComment from './DetailComment';
+import { FaArrowLeft } from 'react-icons/fa';
 import {
   responsive,
   menuGray,
@@ -31,7 +32,12 @@ const Detail = () => {
   return (
     <DetailContainer>
       <div className='post-container'>
-        <h2 className='title'>{currentPost.title}</h2>
+        <div className='title-wrapper'>
+          <Link to='/board'>
+            <FaArrowLeft className='go-back' size={32} />
+          </Link>
+          <h2 className='title'>{currentPost.title}</h2>
+        </div>
         <div className='wrapper'>
           <p className='writer'>작성자 : {currentPost.writerName}</p>
           <p className='date'>{currentPost.date}</p>
@@ -51,7 +57,7 @@ const Detail = () => {
             }
             disabled={!currentUser}
           />
-          <button>등록</button>
+          <button disabled={!currentUser}>등록</button>
         </div>
         <div className='navigator'>
           {nextPost && (
@@ -81,18 +87,22 @@ const DetailContainer = styled.div`
   padding-top: 70.35px;
   margin: 2.5vw;
 
-  .flex-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
   .post-container {
     width: 810px;
 
-    .title {
-      font-size: 32px;
-      font-weight: 700;
+    .title-wrapper {
+      display: flex;
+      align-items: center;
+
+      .go-back {
+        margin-right: 10px;
+        color: ${mainBlack};
+      }
+
+      .title {
+        font-size: 32px;
+        font-weight: 700;
+      }
     }
 
     .wrapper {
@@ -136,8 +146,7 @@ const DetailContainer = styled.div`
         }
       }
       button {
-        width: 15%;
-        margin-left: 5%;
+        width: 20%;
         padding: 15px;
         border: none;
         background-color: transparent;

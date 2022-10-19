@@ -64,7 +64,6 @@ const Board = () => {
             count={lastPage}
             defaultPage={page}
             color='success'
-            size='large'
             onChange={handlePage}
           />
           {currentUser && (

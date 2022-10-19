@@ -4,6 +4,9 @@ import Header from './components/header/Header';
 import Login from './components/login/Login';
 import SignUp from './pages/signup/SignUp';
 import Home from './pages/home/Home';
+import Board from './pages/board/Board';
+import Detail from './pages/detail/Detail';
+import Write from './pages/write/Write';
 import MovePage from './components/MovePage';
 import { createTheme, ThemeProvider } from '@mui/material';
 import GlobalStyle from './styles/GlobalStyle';
@@ -27,6 +30,9 @@ function Router() {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/signup' element={<SignUp />} />
+            <Route path='/board' element={<Board />} />
+            <Route path='/detail/:id' element={<Detail />} />
+            <Route path='/write' element={<Write />} />
           </Routes>
           <Header />
         </RecoilRoot>

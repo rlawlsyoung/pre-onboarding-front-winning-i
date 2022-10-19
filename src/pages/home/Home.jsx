@@ -79,6 +79,10 @@ const HomeContainer = styled.div`
       height: auto;
       margin-top: 50px;
     }
+
+    .login-sign {
+      font-size: 18px;
+    }
   } ;
 `;
 

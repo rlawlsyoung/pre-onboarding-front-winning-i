@@ -24,7 +24,7 @@ const SecondChart = ({ chartData }) => {
   return (
     <SecondChartContainer className='flex-center'>
       <div className='chart-container flex-center'>
-        <h2 className='title'>조회자 연령층</h2>
+        <h2 className='title'>조회자 연령층 (%)</h2>
         <Pie data={data} className='chart' />
       </div>
     </SecondChartContainer>

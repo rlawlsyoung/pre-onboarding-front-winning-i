@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const FirstChart = ({ chartData }) => {
   const data = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    labels: ['Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'],
     datasets: [
       {
         label: '방문자 수',

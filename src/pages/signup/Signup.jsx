@@ -65,7 +65,7 @@ const SignUp = () => {
     );
   };
   return (
-    <StyledSignUp>
+    <SignUpContainer>
       <form className='sign-up-form flex-center' onSubmit={handleSubmit}>
         <h2 className='title'>간편 회원가입</h2>
         <p className='sign flex-center'>
@@ -135,11 +135,11 @@ const SignUp = () => {
           회원가입
         </button>
       </form>
-    </StyledSignUp>
+    </SignUpContainer>
   );
 };
 
-const StyledSignUp = styled.div`
+const SignUpContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

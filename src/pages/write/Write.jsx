@@ -7,7 +7,7 @@ import {
   currentUserAtom,
   pageAtom,
 } from '../../atom';
-import { mainBlack, mainGray, menuGray } from '../../styles/theme';
+import { responsive, mainBlack, menuGray } from '../../styles/theme';
 import styled from 'styled-components';
 
 const Write = () => {
@@ -155,6 +155,12 @@ const WriteContainer = styled.div`
         font-size: 14px;
         cursor: pointer;
       }
+    }
+  }
+
+  @media ${responsive.tablet} {
+    .write-container {
+      width: 90vw;
     }
   }
 `;

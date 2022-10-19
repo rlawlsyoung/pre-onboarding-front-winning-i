@@ -84,7 +84,6 @@ const BoardContainer = styled.div`
   align-items: center;
   padding-top: 70.35px;
   margin: 3.5vw;
-  white-space: nowrap;
 
   .flex-center {
     display: flex;
@@ -110,6 +109,7 @@ const BoardContainer = styled.div`
 
     .post-id {
       width: 35px;
+      white-space: nowrap;
     }
 
     .post-date {
@@ -141,6 +141,11 @@ const BoardContainer = styled.div`
     }
     .pagination-wrapper {
       width: 90vw;
+    }
+    .pagination-wrapper {
+      .write-post {
+        margin-bottom: 90px;
+      }
     }
   } ;
 `;

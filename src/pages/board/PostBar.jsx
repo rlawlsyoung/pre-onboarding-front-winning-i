@@ -52,6 +52,10 @@ const PostBarContainer = styled.div`
 
   @media ${responsive.tablet} {
     width: 90vw;
+
+    .post-writer {
+      white-space: nowrap;
+    }
   } ;
 `;
 

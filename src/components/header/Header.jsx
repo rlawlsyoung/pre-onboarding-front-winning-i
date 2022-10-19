@@ -15,7 +15,6 @@ const Header = () => {
   const localId = localStorage.getItem('id');
 
   useEffect(() => {
-    console.log(localId);
     if (localUserData) {
       setUserData(JSON.parse(localUserData));
     }
@@ -26,7 +25,6 @@ const Header = () => {
       const relevantUser = userData.filter(
         el => el.userInfo.id === Number(localId)
       );
-      console.log(relevantUser[0]);
       setCurrentUser(relevantUser[0]);
     }
   }, [userData]);

@@ -23,15 +23,13 @@ const Detail = () => {
   const [commentData, setCommentData] = useRecoilState(commentDataAtom);
 
   const currentPost = postData.filter(el => Number(params.id) === el.postId)[0];
-  const nextPost = postData.filter(
-    el => Number(params.id) + 1 === el.postId
-  )[0];
-  const prevPost = postData.filter(
-    el => Number(params.id) - 1 === el.postId
-  )[0];
+  const nextPost = postData[postData.indexOf(currentPost) - 1];
+  const prevPost = postData[postData.indexOf(currentPost) + 1];
   const currentComments = commentData.filter(
     el => Number(params.id) === el.postId
   )[0].comments;
+
+  console.log(postData.indexOf(currentPost));
 
   const handleComment = e => {
     setCommentValue(e.target.value);
@@ -73,6 +71,16 @@ const Detail = () => {
     setPostData(copiedData);
     localStorage.setItem('postData', JSON.stringify(copiedData));
     navigate('/board');
+  };
+
+  const moveToNext = () => {
+    navigate(`/detail/${nextPost.postId}`);
+    setCommentValue('');
+  };
+
+  const moveToPrev = () => {
+    navigate(`/detail/${prevPost.postId}`);
+    setCommentValue('');
   };
 
   return (
@@ -127,18 +135,14 @@ const Detail = () => {
         </div>
         <div className='navigator'>
           {nextPost && (
-            <Link to={`/detail/${nextPost.postId}`}>
-              <div className='next-post'>
-                <p className='bold'>다음 글</p> {nextPost.title}
-              </div>
-            </Link>
+            <div className='next-post' onClick={moveToNext}>
+              <p className='bold'>다음 글</p> {nextPost.title}
+            </div>
           )}
           {prevPost && (
-            <Link to={`/detail/${prevPost.postId}`}>
-              <div className='prev-post'>
-                <p className='bold'>이전 글</p> {prevPost.title}
-              </div>
-            </Link>
+            <div className='prev-post' onClick={moveToPrev}>
+              <p className='bold'>이전 글</p> {prevPost.title}
+            </div>
           )}
         </div>
       </div>
@@ -252,6 +256,7 @@ const DetailContainer = styled.div`
         padding: 10px;
         background-color: ${menuGray};
         color: ${mainBlack};
+        cursor: pointer;
 
         .bold {
           font-weight: 700;

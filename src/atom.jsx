@@ -25,17 +25,26 @@ const currentUserAtom = atom({
 
 const postDataAtom = atom({
   key: 'postData',
-  default: postData,
+  default: localStorage.getItem('postData')
+    ? JSON.parse(localStorage.getItem('postData'))
+    : postData,
 });
 
 const commentDataAtom = atom({
   key: 'commentData',
-  default: commentData,
+  default: localStorage.getItem('commentData')
+    ? JSON.parse(localStorage.getItem('commentData'))
+    : commentData,
 });
 
 const pageAtom = atom({
   key: 'page',
   default: 1,
+});
+
+const darkModeAtom = atom({
+  key: 'darkMode',
+  default: false,
 });
 
 export {
@@ -46,4 +55,5 @@ export {
   postDataAtom,
   commentDataAtom,
   pageAtom,
+  darkModeAtom,
 };

@@ -1,7 +1,61 @@
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import {
+  postDataAtom,
+  commentDataAtom,
+  currentUserAtom,
+  pageAtom,
+} from '../../atom';
 import { mainBlack, mainGray, menuGray } from '../../styles/theme';
 import styled from 'styled-components';
 
 const Write = () => {
+  const navigate = useNavigate();
+  const [titleValue, setTitleValue] = useState('');
+  const [bodyValue, setBodyValue] = useState('');
+  const [postData, setPostData] = useRecoilState(postDataAtom);
+  const [commentData, setCommentData] = useRecoilState(commentDataAtom);
+  const currentUser = useRecoilValue(currentUserAtom);
+  const setPage = useSetRecoilState(pageAtom);
+
+  const handleTitle = e => setTitleValue(e.target.value);
+  const handleBody = e => setBodyValue(e.target.value);
+
+  const handleWrite = () => {
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = ('0' + (1 + date.getMonth())).slice(-2);
+    let day = ('0' + date.getDate()).slice(-2);
+
+    const newPostData = [
+      {
+        postId: postData[0].postId + 1,
+        writerId: currentUser.userInfo.id,
+        writerName: currentUser.userInfo.name,
+        date: `${year}/${month}/${day}`,
+        title: titleValue,
+        body: bodyValue,
+      },
+      ...postData,
+    ];
+
+    const newCommentData = [
+      {
+        postId: commentData[0].postId + 1,
+        comments: [],
+      },
+      ...commentData,
+    ];
+
+    setPostData(newPostData);
+    setCommentData(newCommentData);
+    localStorage.setItem('postData', JSON.stringify(newPostData));
+    localStorage.setItem('commentData', JSON.stringify(newCommentData));
+    setPage(1);
+    navigate('/board');
+  };
+
   return (
     <WriteContainer>
       <h2 className='title'>게시글 작성</h2>
@@ -10,12 +64,27 @@ const Write = () => {
           type='text'
           className='post-title'
           placeholder='제목을 입력해주세요'
+          onChange={handleTitle}
+          maxLength={14}
         />
-        <textarea type='text' className='post-body' placeholder='내용...' />
+        <textarea
+          type='text'
+          className='post-body'
+          placeholder='내용...'
+          onChange={handleBody}
+        />
 
         <div className='button-wrapper'>
-          <button className='cancel'>취소</button>
-          <button className='write'>작성</button>
+          <Link to='/board'>
+            <button className='cancel'>취소</button>
+          </Link>
+          <button
+            className='write'
+            disabled={!titleValue || !bodyValue}
+            onClick={handleWrite}
+          >
+            작성
+          </button>
         </div>
       </div>
     </WriteContainer>
@@ -27,10 +96,10 @@ const WriteContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding-top: 70.35px;
-  margin: 2.5vw;
+  margin: 3.5vw;
 
   .title {
-    margin-bottom: 20px;
+    margin-bottom: 35px;
     font-size: 28px;
     font-weight: 700;
   }

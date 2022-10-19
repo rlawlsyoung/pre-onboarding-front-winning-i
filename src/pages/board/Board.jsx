@@ -15,9 +15,11 @@ const Board = () => {
       ? parseInt(postData.length / 5)
       : parseInt(postData.length / 5) + 1;
 
-  const firstPageData = postData.slice(postData.length - 5, postData.length);
+  const firstPageData = postData.slice(0, 5);
   const [page, setPage] = useRecoilState(pageAtom);
   const [data, setData] = useState(firstPageData);
+
+  console.log(postData.slice(0, 5));
 
   useEffect(() => {
     if (page === lastPage) {

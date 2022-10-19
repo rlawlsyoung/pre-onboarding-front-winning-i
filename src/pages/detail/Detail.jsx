@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { postDataAtom, commentDataAtom, currentUserAtom } from '../../atom';
 import DetailComment from './DetailComment';
@@ -15,6 +15,7 @@ import styled from 'styled-components';
 
 const Detail = () => {
   const params = useParams();
+  const navigate = useNavigate();
   const commentsRef = useRef();
   const [commentValue, setCommentValue] = useState('');
   const currentUser = useRecoilValue(currentUserAtom);
@@ -52,6 +53,7 @@ const Detail = () => {
         commentBody: commentValue,
       });
       setCommentData(copiedData);
+      localStorage.setItem('commentData', JSON.stringify(copiedData));
       setCommentValue('');
     }
   };
@@ -62,16 +64,35 @@ const Detail = () => {
     }
   };
 
+  const removePost = () => {
+    const currentIndex = postData.indexOf(
+      postData.filter(el => Number(params.id) === el.postId)[0]
+    );
+    const copiedData = JSON.parse(JSON.stringify(postData));
+    copiedData.splice(currentIndex, 1);
+    setPostData(copiedData);
+    localStorage.setItem('postData', JSON.stringify(copiedData));
+    navigate('/board');
+  };
+
   return (
     <DetailContainer>
       <div className='post-container'>
-        <div className='title-wrapper'>
-          <Link to='/board'>
-            <FaArrowLeft className='go-back' size={32} />
-          </Link>
-          <h2 className='title'>{currentPost.title}</h2>
+        <div className='post-head'>
+          <div className='title-wrapper'>
+            <Link to='/board'>
+              <FaArrowLeft className='go-back' size={32} />
+            </Link>
+            <h2 className='title'>{currentPost.title}</h2>
+          </div>
+          {currentUser && currentUser.userInfo.id === currentPost.writerId && (
+            <button className='remove-post' onClick={removePost}>
+              삭제
+            </button>
+          )}
         </div>
-        <div className='wrapper'>
+
+        <div className='post-info'>
           <p className='writer'>작성자 : {currentPost.writerName}</p>
           <p className='date'>{currentPost.date}</p>
         </div>
@@ -135,22 +156,36 @@ const DetailContainer = styled.div`
   .post-container {
     width: 810px;
 
-    .title-wrapper {
+    .post-head {
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      .title-wrapper {
+        display: flex;
+        align-items: center;
 
-      .go-back {
-        margin-right: 10px;
-        color: ${mainBlack};
+        .go-back {
+          margin-right: 10px;
+          color: ${mainBlack};
+        }
+
+        .title {
+          font-size: 32px;
+          font-weight: 700;
+        }
       }
 
-      .title {
-        font-size: 32px;
-        font-weight: 700;
+      .remove-post {
+        width: 64px;
+        height: 32px;
+        background-color: ${mainBlack};
+        color: white;
+        font-family: 'Pretendard', sans-serif;
+        cursor: pointer;
       }
     }
 
-    .wrapper {
+    .post-info {
       display: flex;
       justify-content: space-between;
       margin: 20px 0;

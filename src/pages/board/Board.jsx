@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { postDataAtom, pageAtom } from '../../atom';
+import { postDataAtom, pageAtom, currentUserAtom } from '../../atom';
 import PostBar from './PostBar';
-import { responsive, mainGray } from '../../styles/theme';
+import { responsive, mainGray, mainBlack } from '../../styles/theme';
 import { Stack, Pagination } from '@mui/material';
 import styled from 'styled-components';
 
 const Board = () => {
   const postData = useRecoilValue(postDataAtom);
-
+  const currentUser = useRecoilValue(currentUserAtom);
   const lastPage =
     postData.length % 5 === 0
       ? parseInt(postData.length / 5)
@@ -56,14 +56,21 @@ const Board = () => {
             );
           })}
         </Stack>
-        <Pagination
-          className='pagination'
-          count={lastPage}
-          defaultPage={page}
-          color='success'
-          size='large'
-          onChange={handlePage}
-        />
+        <div className='pagination-wrapper flex-center'>
+          <Pagination
+            className='pagination'
+            count={lastPage}
+            defaultPage={page}
+            color='success'
+            size='large'
+            onChange={handlePage}
+          />
+          {currentUser && (
+            <Link to='/write' className='write-post flex-center'>
+              글 작성
+            </Link>
+          )}
+        </div>
       </Stack>
     </BoardContainer>
   );
@@ -75,6 +82,7 @@ const BoardContainer = styled.div`
   align-items: center;
   padding-top: 70.35px;
   margin: 3.5vw;
+  white-space: nowrap;
 
   .flex-center {
     display: flex;
@@ -107,13 +115,29 @@ const BoardContainer = styled.div`
     }
   }
 
-  .pagination {
+  .pagination-wrapper {
     position: absolute;
+    width: 810px;
     bottom: 70px;
+
+    .write-post {
+      position: absolute;
+      right: 0px;
+      width: 90px;
+      height: 30px;
+      background-color: ${mainBlack};
+      color: white;
+      font-family: 'Pretendard', sans-serif;
+      font-size: 14px;
+      cursor: pointer;
+    }
   }
 
   @media ${responsive.tablet} {
     .board-head {
+      width: 90vw;
+    }
+    .pagination-wrapper {
       width: 90vw;
     }
   } ;

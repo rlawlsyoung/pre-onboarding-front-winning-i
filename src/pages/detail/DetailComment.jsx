@@ -13,6 +13,7 @@ const DetailComment = ({ data, currentUser, commentData, setCommentData }) => {
     const commentIndex = commentData[currentIndex].comments.indexOf(data);
     copiedComments.splice(commentIndex, 1);
     setCommentData(copiedData);
+    localStorage.setItem('commentData', JSON.stringify(copiedData));
   };
   return (
     <DetailCommentContainer>
@@ -37,6 +38,10 @@ const DetailCommentContainer = styled.div`
     .name {
       margin-right: 10px;
       font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .comment-body {
       white-space: nowrap;
     }
   }

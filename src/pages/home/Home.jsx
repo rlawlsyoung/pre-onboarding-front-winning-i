@@ -47,7 +47,7 @@ const HomeContainer = styled.div`
   .login-sign {
     height: 50vh;
     color: ${mainGray};
-    font-size: 26px;
+    font-size: 28px;
     font-weight: 700;
   }
 

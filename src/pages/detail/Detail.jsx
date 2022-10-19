@@ -53,7 +53,6 @@ const Detail = () => {
       });
       setCommentData(copiedData);
       setCommentValue('');
-      document.getElementsByClassName('comments').scrollTo(1, 1);
     }
   };
 
@@ -79,7 +78,13 @@ const Detail = () => {
         <div className='body'>{currentPost.body}</div>
         <div className='comments' ref={commentsRef}>
           {currentComments.map(el => (
-            <DetailComment data={el} currentUser={currentUser} key={el.id} />
+            <DetailComment
+              data={el}
+              currentUser={currentUser}
+              commentData={commentData}
+              setCommentData={setCommentData}
+              key={el.id}
+            />
           ))}
         </div>
         <div className='leave-comment'>

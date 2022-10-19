@@ -1,7 +1,19 @@
+import { useParams } from 'react-router-dom';
 import { FaTrash } from 'react-icons/fa';
 import styled from 'styled-components';
 
-const DetailComment = ({ data, currentUser }) => {
+const DetailComment = ({ data, currentUser, commentData, setCommentData }) => {
+  const params = useParams();
+  const handleRemove = e => {
+    const currentIndex = commentData.indexOf(
+      commentData.filter(el => Number(params.id) === el.postId)[0]
+    );
+    const copiedData = JSON.parse(JSON.stringify(commentData));
+    const copiedComments = copiedData[currentIndex].comments;
+    const commentIndex = commentData[currentIndex].comments.indexOf(data);
+    copiedComments.splice(commentIndex, 1);
+    setCommentData(copiedData);
+  };
   return (
     <DetailCommentContainer>
       <div className='comment-wrapper'>
@@ -9,7 +21,7 @@ const DetailComment = ({ data, currentUser }) => {
         <p className='comment-body'>{data.commentBody}</p>
       </div>
       {currentUser && currentUser.userInfo.id === data.writerId && (
-        <FaTrash className='remove' size={16} />
+        <FaTrash className='remove' size={16} onClick={handleRemove} />
       )}
     </DetailCommentContainer>
   );

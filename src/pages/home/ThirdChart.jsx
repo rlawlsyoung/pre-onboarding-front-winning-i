@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const ThirdChart = ({ chartData }) => {
   const data = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    labels: ['Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'],
     datasets: [
       {
         label: '게시글 수',

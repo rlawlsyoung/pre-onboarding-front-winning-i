@@ -1,3 +1,4 @@
+import { useState, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { postDataAtom, commentDataAtom, currentUserAtom } from '../../atom';
@@ -14,6 +15,8 @@ import styled from 'styled-components';
 
 const Detail = () => {
   const params = useParams();
+  const commentsRef = useRef();
+  const [commentValue, setCommentValue] = useState('');
   const currentUser = useRecoilValue(currentUserAtom);
   const [postData, setPostData] = useRecoilState(postDataAtom);
   const [commentData, setCommentData] = useRecoilState(commentDataAtom);
@@ -29,6 +32,37 @@ const Detail = () => {
     el => Number(params.id) === el.postId
   )[0].comments;
 
+  const handleComment = e => {
+    setCommentValue(e.target.value);
+  };
+
+  const handleLeaveComment = e => {
+    if (commentValue) {
+      const currentIndex = commentData.indexOf(
+        commentData.filter(el => Number(params.id) === el.postId)[0]
+      );
+      const copiedData = JSON.parse(JSON.stringify(commentData));
+      const copiedComments = copiedData[currentIndex].comments;
+      copiedComments.push({
+        id: copiedComments.length
+          ? copiedComments[copiedComments.length - 1].id + 1
+          : 1,
+        writerId: currentUser.userInfo.id,
+        writerName: currentUser.userInfo.name,
+        commentBody: commentValue,
+      });
+      setCommentData(copiedData);
+      setCommentValue('');
+      document.getElementsByClassName('comments').scrollTo(1, 1);
+    }
+  };
+
+  const handleKeyPress = e => {
+    if (e.key == 'Enter') {
+      handleLeaveComment();
+    }
+  };
+
   return (
     <DetailContainer>
       <div className='post-container'>
@@ -43,9 +77,9 @@ const Detail = () => {
           <p className='date'>{currentPost.date}</p>
         </div>
         <div className='body'>{currentPost.body}</div>
-        <div className='comments'>
+        <div className='comments' ref={commentsRef}>
           {currentComments.map(el => (
-            <DetailComment data={el} key={el.id} />
+            <DetailComment data={el} currentUser={currentUser} key={el.id} />
           ))}
         </div>
         <div className='leave-comment'>
@@ -55,9 +89,15 @@ const Detail = () => {
             placeholder={
               currentUser ? '댓글을 입력하세요.' : '로그인 후 이용해주세요.'
             }
+            onChange={handleComment}
+            onKeyDown={handleKeyPress}
+            value={commentValue}
+            maxLength={24}
             disabled={!currentUser}
           />
-          <button disabled={!currentUser}>등록</button>
+          <button onClick={handleLeaveComment} disabled={!currentUser}>
+            등록
+          </button>
         </div>
         <div className='navigator'>
           {nextPost && (

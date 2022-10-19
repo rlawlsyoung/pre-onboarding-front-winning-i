@@ -29,8 +29,6 @@ const Detail = () => {
     el => Number(params.id) === el.postId
   )[0].comments;
 
-  console.log(postData.indexOf(currentPost));
-
   const handleComment = e => {
     setCommentValue(e.target.value);
   };
@@ -74,7 +72,6 @@ const Detail = () => {
     const copiedCommentData = JSON.parse(JSON.stringify(commentData));
     copiedCommentData.splice(currentIndex, 1);
     setCommentData(copiedCommentData);
-    console.log(copiedCommentData);
     localStorage.setItem('commentData', JSON.stringify(copiedCommentData));
 
     navigate('/board');

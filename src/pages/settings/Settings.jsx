@@ -6,7 +6,6 @@ import styled from 'styled-components';
 
 const Settings = () => {
   const [currentUser, setCurrentUser] = useRecoilState(currentUserAtom);
-  console.log(currentUser);
   return (
     <SettingsContainer>
       <h2 className='title'>설정</h2>

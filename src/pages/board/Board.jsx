@@ -19,8 +19,6 @@ const Board = () => {
   const [page, setPage] = useRecoilState(pageAtom);
   const [data, setData] = useState(firstPageData);
 
-  console.log(postData.slice(0, 5));
-
   useEffect(() => {
     if (page === lastPage) {
       setData(postData.slice(5 * (page - 1)));
@@ -64,7 +62,6 @@ const Board = () => {
             count={lastPage}
             defaultPage={page}
             color='success'
-            size='large'
             onChange={handlePage}
           />
           {currentUser && (

@@ -124,7 +124,7 @@ const BoardContainer = styled.div`
       position: absolute;
       right: 0px;
       width: 90px;
-      height: 30px;
+      height: 35px;
       background-color: ${mainBlack};
       color: white;
       font-family: 'Pretendard', sans-serif;

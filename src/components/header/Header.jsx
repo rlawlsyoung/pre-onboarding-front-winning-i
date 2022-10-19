@@ -1,7 +1,12 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSetRecoilState, useRecoilState } from 'recoil';
-import { userDataAtom, currentUserAtom } from '../../atom';
+import {
+  userDataAtom,
+  currentUserAtom,
+  postDataAtom,
+  commentDataAtom,
+} from '../../atom';
 import MenuIcon from './MenuIcon';
 import SideBar from './SideBar';
 import wi from '../../assets/img/wi.svg';
@@ -11,12 +16,23 @@ import styled from 'styled-components';
 const Header = () => {
   const setCurrentUser = useSetRecoilState(currentUserAtom);
   const [userData, setUserData] = useRecoilState(userDataAtom);
+  const setPostData = useSetRecoilState(postDataAtom);
+  const setCommentData = useSetRecoilState(commentDataAtom);
   const localUserData = localStorage.getItem('userData');
   const localId = localStorage.getItem('id');
+  const localPostData = localStorage.getItem('postData');
+  const localCommentData = localStorage.getItem('commentData');
+
   useEffect(() => {
     console.log(localId);
     if (localUserData) {
       setUserData(JSON.parse(localUserData));
+    }
+    if (localPostData) {
+      setPostData(JSON.parse(localPostData));
+    }
+    if (localCommentData) {
+      setCommentData(JSON.parse(localCommentData));
     }
   }, []);
 

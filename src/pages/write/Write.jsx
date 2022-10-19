@@ -80,7 +80,7 @@ const Write = () => {
           </Link>
           <button
             className='write'
-            disabled={!titleValue || !bodyValue}
+            disabled={!titleValue || !bodyValue || !currentUser}
             onClick={handleWrite}
           >
             작성
@@ -149,6 +149,7 @@ const WriteContainer = styled.div`
         width: 90px;
         height: 35px;
         margin-left: 10px;
+        border: none;
         background-color: ${mainBlack};
         color: white;
         font-family: 'Pretendard', sans-serif;

@@ -66,10 +66,17 @@ const Detail = () => {
     const currentIndex = postData.indexOf(
       postData.filter(el => Number(params.id) === el.postId)[0]
     );
-    const copiedData = JSON.parse(JSON.stringify(postData));
-    copiedData.splice(currentIndex, 1);
-    setPostData(copiedData);
-    localStorage.setItem('postData', JSON.stringify(copiedData));
+    const copiedPostData = JSON.parse(JSON.stringify(postData));
+    copiedPostData.splice(currentIndex, 1);
+    setPostData(copiedPostData);
+    localStorage.setItem('postData', JSON.stringify(copiedPostData));
+
+    const copiedCommentData = JSON.parse(JSON.stringify(commentData));
+    copiedCommentData.splice(currentIndex, 1);
+    setCommentData(copiedCommentData);
+    console.log(copiedCommentData);
+    localStorage.setItem('commentData', JSON.stringify(copiedCommentData));
+
     navigate('/board');
   };
 
@@ -182,6 +189,7 @@ const DetailContainer = styled.div`
       .remove-post {
         width: 64px;
         height: 32px;
+        border: none;
         background-color: ${mainBlack};
         color: white;
         font-family: 'Pretendard', sans-serif;

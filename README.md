@@ -1,10 +1,11 @@
 # Pre-Onboarding 3주차 과제 2) 차트 페이지와 게시판 만들기
 
-안녕하세요! JUSTCODE 6기 과정에서 진행한 Pre-Onboarding에 참여한 김진영입니다.
-3주차 두 번째 과제인 차트 페이지와 게시판 만들기입니다.
+안녕하세요! JUSTCODE 6기 과정에서 진행한 Pre-Onboarding에 참여한 김진영입니다. <br/>
+3주차 두 번째 과제인 **차트 페이지와 게시판 만들기**입니다.
 
-개발기간 : 22.10.15 ~ 22.10.19 (5일)
-개발인원 : 1명
+**개발기간 :** 22.10.15 ~ 22.10.19 (5일)
+
+**개발인원 :** 1명 (본인)
 
 ##  배포 링크
 
@@ -12,7 +13,11 @@ https://justcode-pre-onboarding-3-2.netlify.app/
 
 ## 실행 방법
 
-레포지토리 클론하시고 `npm i` 후 `npm run dev` 커맨드 입력하시면 실행됩니다.
+1. Node.js를 최신버전으로 설치합니다.
+
+2. `npm install` 커맨드를 통해 dependencies를 설치해줍니다.
+
+3. `npm run dev` 커맨드를 통해 프로젝트를 실행합니다.
 
 ## 사용한 언어 및 라이브러리 
 `JavaScript` `React.js` `Recoil` `styled-components` `chart-js` `MUI` 등등
@@ -38,7 +43,9 @@ Pre-Onboarding 3주차 두 번째 과제인 **차트 페이지와 게시판 만�
 
 ---
 
-## 후기 (블로그에 작성 후 링크 예정)
+## 후기
+
+[블로그 링크](https://velog.io/@jinyoung985/Pre-Onboarding-%EC%B0%A8%ED%8A%B8-%ED%8E%98%EC%9D%B4%EC%A7%80%EC%99%80-%EA%B2%8C%EC%8B%9C%ED%8C%90-%EB%A7%8C%EB%93%A4%EA%B8%B0)로 접속하시면 확인하실 수 있습니다.
 
 ## Reference
 
